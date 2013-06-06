@@ -1,0 +1,12 @@
+微淘项目说明
+=================
+
+### IDE
+
+    wetao项目推荐大家使用webstorm6.0及以上版本
+
+    1.设置filewatcher ,自动生成wetao.css和detailall.css
+
+### 发布
+
+    发布默认只发布build目录中的静态文件。
