@@ -7,6 +7,8 @@
 
 var _hash = window.location.hash.split('/');
 
+//adfasdfasdf
+
 namespace('taobao.utils.server.simplemtop').getApi("mtop.sns.pubAccount.info",
     '2.0',
     {'snsId':_hash[1]},
@@ -24,6 +26,7 @@ namespace('taobao.utils.server.simplemtop').getApi("mtop.sns.pubAccount.info",
 
     }
 );
+
 
 namespace('taobao.utils.server.simplemtop').getApi("mtop.sns.feed.detail",
     '2.0',
