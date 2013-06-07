@@ -4,6 +4,43 @@
  * Time: PM1:57
  */
 
+
+var _hash = window.location.hash.split('/');
+
+namespace('taobao.utils.server.simplemtop').getApi("mtop.sns.pubAccount.info",
+    '2.0',
+    {'snsId':_hash[1]},
+    {},
+    function (result) {
+        //success
+        var d = result.data;
+        var _html = '<img width="32" height="32" src="' + d.logoUrl +
+            '" /><div><h2>' + d.nick +
+            '</h2><p>' + d.fansCount + '关注</p></div>';
+        $('#detailPage div.account').html(_html);
+    },
+    function(result){
+        //fail
+
+    }
+);
+
+namespace('taobao.utils.server.simplemtop').getApi("mtop.sns.feed.detail",
+    '2.0',
+    {'snsId':_hash[1],'feedId':_hash[2]},
+    {},
+    function (result) {
+        //success
+        console.log(result);
+
+    },
+    function(result){
+        //fail
+
+    }
+);
+
+
 $(function () {
 
     var accountMode= Backbone.Model.extend({
@@ -11,18 +48,21 @@ $(function () {
     });
 
     var abc=new accountMode({'id':121212});
-    abc.fetch();
+
+
+
+
+
     var detailView = Backbone.View.extend({
         el: $("#detailPage"),
         events: {},
         model:abc,
         initialize: function() {
-            alert(2);
+            //alert(2);
         },
         render: function() {
             alert(1);
         }
-
 
     });
     var app= new detailView;
