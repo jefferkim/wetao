@@ -1,5 +1,10 @@
 /**
  * User: 晓田(tancy)
+ * Date: 13-6-8
+ * Time: PM1:55
+ */
+/**
+ * User: 晓田(tancy)
  * Date: 13-6-6
  * Time: PM1:57
  */
@@ -606,9 +611,6 @@ var getDetailData = function(snsId,feedId){
         }
     );
 }
-
-
-
 
 $(function(){
     window.lazyload.init({ lazyHeight: 300 })
