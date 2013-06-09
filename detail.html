@@ -25,6 +25,8 @@
     <a href="http://h5.m.taobao.com/we/index.htm#account/<%=id %>" snsid="<%=id %>" class="log" data-log="detailAccount">
         <% if(typeof logoUrl!='undefined'&&logoUrl!==''){ %>
         <img src="<%=logoUrl +(weTao.isRetina()?'_64x64.jpg':'_32x32.jpg') %>"/>
+        <% }else{%>
+           <div class="default"></div>
         <% } %>
         <div>
             <h2><%= nick %></h2>
@@ -32,7 +34,7 @@
             <% if (fansCount == 0) { %>
             <span>还没有人关注</span>
             <% } else{ %>
-            <span><%=formatFans(fansCount) %>关注</span>
+            <span><%=formatFans(fansCount) %>关注者</span>
             <% } %>
             <% } %>
         </div>
@@ -57,7 +59,7 @@
                data-id="<%= tiles[i].item.id %>">
                 <img class="lazy" dataimg="<%= getBetterImg(tiles[i].path, 180, parseInt(tiles[i].picWidth),true) %>">
                 <h4><%=tiles[i].text%></h4>
-                <p id="item<%=tiles[i].item.id%>"></p>
+                <p id="price<%=tiles[i].item.id%>"></p>
             </a>
         </li>
         <% if((i+1)%2==0){ %>
@@ -97,7 +99,7 @@
 
     <% } else if (tiles[i].type == "picItem") { %>
     <div class="media">
-        <a style="display: block" href="<%= getItemDetailUrl('a', { itemId: tiles[i].item.id }) %>" class="item"
+        <a style="display: block" id="price<%= tiles[i].item.id %" href="<%= getItemDetailUrl('a', { itemId: tiles[i].item.id }) %>" class="item"
            data-id="<%= tiles[i].item.id %>">
             <img class="lazy"
             <%if(Env.isDesktop){%>

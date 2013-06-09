@@ -351,39 +351,7 @@ function detailImageSizeStyle(actualWidth, actualHeight) {
 
 
 
-var getPrices = function (ids, fun) {
-    var result = [];
-    var uncachedIds = [];
-    ids.forEach(function (id) {
-        if (priceCache[id]) {
-            result.push({id:id, price:priceCache[id]});
-        } else {
-            uncachedIds.push(id);
-        }
-    });
-    if (uncachedIds.length) {
-        $.ajax({
-            type:'GET',
-            dataType:'json',
-            url:namespace('taobao.utils.uri').getUrl("s_price", {nid:uncachedIds.join(",")}) + "&callback=?",
-            success:function (sret) {
-                if (sret.result && "true" == sret.result && sret.listItem) {
-                    sret.listItem.forEach(function (item) {
-                        priceCache[item.itemNumId] = item.price;
-                        result.push({id:item.itemNumId, price:item.price});
-                    })
-                }
-                fun && fun.call(arguments.callee, result);
-            },
-            error:function (error) {
-                console.log(error);
-                fun && fun.call(arguments.callee, result);
-            }
-        });
-    } else {
-        fun && fun.call(arguments.callee, result);
-    }
-}
+
 
 var numToBinary = function(num){
     var str = "";
@@ -512,8 +480,7 @@ var getDetailInfoHtml = function(d){
 
         } else if (d.tiles[i].type == "picItem") {
             _h+='<div class="media">';
-            _h+='<a style="display: block" href="'+ getItemDetailUrl('a', { itemId: d.tiles[i].item.id })+'" class="item"';
-            _h+='data-id="'+ d.tiles[i].item.id +'">';
+            _h+='<a style="display: block" href="'+ getItemDetailUrl('a', { itemId: d.tiles[i].item.id })+'" class="item">';
             _h+='<img class="lazy"';
             if(weTao.isDesktop){
                 _h+='dataimg="'+ getBetterImg(d.tiles[i].path, 370, parseInt(d.tiles[i].picWidth),true) +'"';
@@ -523,7 +490,7 @@ var getDetailInfoHtml = function(d){
                 _h+='style="'+ detailImageSizeStyle(d.tiles[i].picWidth, d.tiles[i].picHeight) +'"';
             }
             _h+='src="http://a.tbcdn.cn/mw/webapp/fav/img/grey.gif">';
-            _h+='<div class="price" style="display: none;"></div></a></div>';
+            _h+='<div id="price'+ d.tiles[i].item.id +'" class="price" style="display: none;"></div></a></div>';
         }
     }
     if (d.linkUrl) {
@@ -590,24 +557,23 @@ var getDetailByComponent = function (d,cb){
 var getPrices=function(result,fun) {
     //获取价格参数
     var ids = [];
-
     result.tiles &&  result.tiles.forEach(function(tile){
             tile.item &&  ids.push(tile.item.id);
         }
     );
-
+    var prices=[];
     $.ajax({
         type:'GET',
         dataType:'json',
-        url:namespace('taobao.utils.uri').getUrl("s_price", {nid:ids.join(",")}) + "&callback=?",
+        url:'http://s.m.taobao.com/search_turn_page_iphone.htm?nid='+ ids.join(",") + "&callback=?",
         success:function (sret) {
             if (sret.result && "true" == sret.result && sret.listItem) {
                 sret.listItem.forEach(function (item) {
-                    priceCache[item.itemNumId] = item.price;
-                    result.push({id:item.itemNumId, price:item.price});
+                    //priceCache[item.itemNumId] = item.price;
+                    prices.push({id:item.itemNumId, price:item.price});
                 })
             }
-            fun && fun.call(arguments.callee, result);
+            fun && fun.call(arguments.callee, prices);
         },
         error:function (error) {
             console.log(error);
@@ -632,7 +598,11 @@ var getDetailData = function(snsId,feedId){
             }else{
                 $('#detailPage div.main').html(getDetailInfoHtml(result.data));
             }
-            //getPrices(result.data);
+            getPrices(result.data,function(d){
+                for(var i= 0,len= d.length;i<len;i++){
+                    $('#price'+ d[i].id).text(d[i].price + '元').show()
+                }
+            });
             window.lazyload.reload();
         },
         function(result){
@@ -651,6 +621,8 @@ $(function(){
 
     getAccountInfoData(_hash[1]);
     getDetailData(_hash[1],_hash[2]);
+
+
 });
 
 
