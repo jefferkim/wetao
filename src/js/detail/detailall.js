@@ -643,8 +643,6 @@ var getDetailData = function(snsId,feedId){
 }
 
 
-
-
 $(function(){
     window.lazyload.init({ lazyHeight: 300 })
     window.lazyload.reload = function () {
