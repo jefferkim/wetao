@@ -508,7 +508,7 @@ var getDetailInfoHtml = function(d){
  * @returns {*}
  */
 getItemDetailUrl = function(module, param){
-    var rui=namespace('taobao.utils.uri').getUrl(module, param);
+    var rui=namespace('taobao.utils.uriBroker').getUrl(module, param);
     if(rui.indexOf('?')==-1){
         rui=rui+'?ap_ref='+encodeURIComponent(window.location.href);
     }else{
