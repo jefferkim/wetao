@@ -40,9 +40,9 @@ weTao={isDesktop:false};
     var defaultDpi = we.getDpi(),
         manulDpi,
     //110x100000.jpg 等宽缩放   , 580, 620, 790
-        widths = [110, 150, 170, 220, 240, 290, 450, 570],
+        widths = [110, 150, 170,180, 220, 240, 290, 450, 570],
     //裁剪成正方形  , 640
-        xzs = [120, 230, 290, 310, 460, 580];
+        xzs = [120,145,230,270,290, 310,360,460, 580];
 
     /**
      * 手工设置图片裁剪时候的缩放比率，默认根据dpi
@@ -578,7 +578,43 @@ var getTemplate = function(param,success,fail){
  *
  * @param d
  */
-var getDetailByComponent = function (d){
+var getDetailByComponent = function (d,cb){
+
+//    getTemplate({'cid': d.componentId},function(tpl){
+//    });
+
+    var pluginTpl=_.template($('#detail_plugin').html());
+
+    $('#detailPage div.main').addClass('plugIn_content').html(pluginTpl(d));
+}
+
+var getPrices=function(result,fun) {
+    //获取价格参数
+    var ids = [];
+
+    result.tiles &&  result.tiles.forEach(function(tile){
+            tile.item &&  ids.push(tile.item.id);
+        }
+    );
+
+    $.ajax({
+        type:'GET',
+        dataType:'json',
+        url:namespace('taobao.utils.uri').getUrl("s_price", {nid:ids.join(",")}) + "&callback=?",
+        success:function (sret) {
+            if (sret.result && "true" == sret.result && sret.listItem) {
+                sret.listItem.forEach(function (item) {
+                    priceCache[item.itemNumId] = item.price;
+                    result.push({id:item.itemNumId, price:item.price});
+                })
+            }
+            fun && fun.call(arguments.callee, result);
+        },
+        error:function (error) {
+            console.log(error);
+            fun && fun.call(arguments.callee, result);
+        }
+    });
 
 }
 
@@ -592,11 +628,12 @@ var getDetailData = function(snsId,feedId){
             //success
             //console.log(result);
             if(typeof result.data.componentId!='undefined'){
+                $('#detailPage div.main').html(getDetailByComponent(result.data));
 
             }else{
                 $('#detailPage div.main').html(getDetailInfoHtml(result.data));
             }
-
+            //getPrices(result.data);
             window.lazyload.reload();
 
         },
@@ -620,8 +657,6 @@ $(function(){
 
     getAccountInfoData(_hash[1]);
     getDetailData(_hash[1],_hash[2]);
-
-
 
 
 });
