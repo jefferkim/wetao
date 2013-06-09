@@ -22,25 +22,22 @@
         </div>
     </div>
     <script id="detail_accinfo_tpl" type="text/template">
-        <a snsid="<%= snsId %>" class="brand log" data-log="detailAccount">
-            <div class="default">
-                <% if(typeof logoUrl!='undefined'&&logoUrl!==''){ %>
-                <img class="avatar" src="<%=getImgUrl(logoUrl,100,60)%>"/>
-                <% } %>
-            </div>
-            <div class="info">
-                <p class="name"><%= nick %></p>
+        <a href="#account/<%=id %>" snsid="<%=id %>" class="log" data-log="detailAccount">
+            <% if(typeof logoUrl!='undefined'&&logoUrl!==''){ %>
+            <img src="<%=logoUrl +(weTao.isRetina()?'_64x64.jpg':'_32x32.jpg') %>"/>
+            <% } %>
+            <div>
+                <h2><%= nick %></h2>
                 <% if(noHelper(accountType)){ %>
-                <p class="follow" snsid="<%=snsId%>">
                     <% if (fansCount == 0) { %>
-                    还没有人关注
-                    <% } else { %>
-                    <span class="count"><%= formatFans(fansCount) %></span> 关注者
+                        <span>还没有人关注</span>
+                    <% } else{ %>
+                         <span><%=formatFans(fansCount) %>关注</span>
                     <% } %>
-                </p>
                 <% } %>
             </div>
         </a>
+
     </script>
     <script id="detail_plugin"  type="text/template">
         <h1><%= title %> </h1>

@@ -442,18 +442,20 @@ var formatFans = function(fansCount){
  * @returns {string} 返回DOM结构
  */
 var getAccountInfoHtml = function(d){
-    var _html = '<img src="' + d.logoUrl +(weTao.isRetina()?'_64x64.jpg':'_32x32.jpg')+'" /><div><h2>' + d.nick +'</h2>';
+//    var _html = '<img src="' + d.logoUrl +(weTao.isRetina()?'_64x64.jpg':'_32x32.jpg')+'" /><div><h2>' + d.nick +'</h2>';
+//
+//    if(noHelper(d.accountType)){
+//        if (d.fansCount == 0) {
+//            _html+='<a>还没有人关注</a>';
+//        } else{
+//            _html+='<a>' + d.fansCount + '关注</a>';
+//        }
+//    }
+//    _html+='</div>';
 
-    if(noHelper(d.accountType)){
-        if (d.fansCount == 0) {
-            _html+='<a>还没有人关注</a>';
-        } else{
-            _html+='<a>' + d.fansCount + '关注</a>';
-        }
-    }
-    _html+='</div>';
+    var _html=_.template($('#detail_accinfo_tpl').html())
 
-    return _html;
+    return  _html(d);
 }
 
 var getAccountInfoData =function(snsId){
@@ -465,6 +467,7 @@ var getAccountInfoData =function(snsId){
         function (result) {
             //success
             var d = result.data;
+
             var h=getAccountInfoHtml(d)
             $('#detailPage div.account').html(h);
         },
@@ -648,7 +651,7 @@ $(function(){
     var _hash = window.location.hash.split('/');
 
     getAccountInfoData(_hash[1]);
-//    getDetailData(_hash[1],_hash[2]);
+    getDetailData(_hash[1],_hash[2]);
 
 
 });
