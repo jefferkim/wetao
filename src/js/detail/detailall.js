@@ -635,11 +635,9 @@ var getDetailData = function(snsId,feedId){
             }
             //getPrices(result.data);
             window.lazyload.reload();
-
         },
         function(result){
             //fail
-
         }
     );
 }
