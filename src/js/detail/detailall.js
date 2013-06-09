@@ -640,8 +640,7 @@ var getDetailData = function(snsId,feedId){
         }
     );
 }
-
-
+///dfdfdfgfgfhhdfdgfg
 $(function(){
     window.lazyload.init({ lazyHeight: 300 })
     window.lazyload.reload = function () {
