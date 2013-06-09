@@ -4,10 +4,6 @@
  * Time: PM1:57
  */
 
-(function () {
-    'use strict';
-
-})();
 
 //全局函数
 weTao={isDesktop:false};
@@ -393,11 +389,11 @@ var numToBinary = function(num){
     var str = "";
     var next = num;
     var result ;
-    do{
-        result = next % 2;
-        str = result + str ;
-        next = Math.floor(next / 2)
-    }while(next != 0)
+//    do{
+//        result = next % 2;
+//        str = result + str ;
+//        next = Math.floor(next / 2)
+//    }while(next != 0)
     return str;
 }
 /**
@@ -446,7 +442,6 @@ var formatFans = function(fansCount){
  * @returns {string} 返回DOM结构
  */
 var getAccountInfoHtml = function(d){
-    'use strict';
     var _html = '<img src="' + d.logoUrl +(weTao.isRetina()?'_64x64.jpg':'_32x32.jpg')+'" /><div><h2>' + d.nick +'</h2>';
 
     if(noHelper(d.accountType)){
@@ -470,7 +465,8 @@ var getAccountInfoData =function(snsId){
         function (result) {
             //success
             var d = result.data;
-            $('#detailPage div.account').html(getAccountInfoHtml(d));
+            var h=getAccountInfoHtml(d)
+            $('#detailPage div.account').html(h);
         },
         function(result){
             //fail
@@ -652,7 +648,7 @@ $(function(){
     var _hash = window.location.hash.split('/');
 
     getAccountInfoData(_hash[1]);
-    getDetailData(_hash[1],_hash[2]);
+//    getDetailData(_hash[1],_hash[2]);
 
 
 });
