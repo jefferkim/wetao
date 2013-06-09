@@ -1,13 +1,3 @@
-/*! PROJECT_NAME - v0.1.0 - 2013-06-09
-* http://PROJECT_WEBSITE/
-* Copyright (c) 2013 YOUR_NAME; Licensed MIT
-* */
-/*
- *页面图片延迟加载
- *
- *  caochun edit by 20120724,修复safari下,前进回退键到当前页面onscroll事件失效
- *  caochun edit by 20130220,扩展图片高清方案
- */
 (function($){
     var win = window;
     function compare(d1,d2){
