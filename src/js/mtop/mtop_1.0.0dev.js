@@ -1,3 +1,5 @@
+/**
+ * mtop*/
 (function () {
     window['namespace'] = function (key, value) {
         // set value
