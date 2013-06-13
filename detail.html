@@ -24,7 +24,7 @@
     </div>
 </div>
 <script id="detail_accinfo_tpl" type="text/template">
-    <a href="http://h5.m.taobao.com/we/index.htm#account/<%=id %>" snsid="<%=id %>" class="log" data-log="detailAccount">
+    <a href="we/index.htm#account/<%=id %>" snsid="<%=id %>" class="log" data-log="detailAccount">
         <% if(typeof logoUrl!='undefined'&&logoUrl!==''){ %>
         <img src="<%=logoUrl +(weTao.isRetina()?'_64x64.jpg':'_32x32.jpg') %>"/>
         <% }else{%>
@@ -49,9 +49,6 @@
     <% if (time) { %>
     <p class="detail-info">
         <span class="icon-clock pub-time"><%= timestamps(time) %></span>
-        <% if(parseInt(commentCount)>0){ %>
-        <span class="icon-comment cmt-count"><%= commentCount %></span>
-        <% } %>
     </p>
     <% } %>
     <ul>
@@ -67,7 +64,6 @@
         <% if((i+1)%2==0){ %>
     </ul><ul>
     <% }%>
-
     <% }  %>
 
 </ul>
