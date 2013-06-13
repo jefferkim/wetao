@@ -76,9 +76,7 @@
     <% if (time) { %>
     <p class="detail-info">
         <span class="icon-clock pub-time"><%= timestamps(time) %></span>
-        <% if(parseInt(commentCount)>0){ %>
-        <span class="icon-comment cmt-count"><%= commentCount %></span>
-        <% } %>
+
     </p>
     <% } %>
     <% for (var i = 0; i < tiles.length; i++) { %>
@@ -126,5 +124,6 @@
 <script src="http://g.assets.daily.taobao.net/mw/wetao/0.0.6/js/mtop_1.0.0dev.js"></script>
 <script src="http://g.assets.daily.taobao.net/mw/wetao/0.0.6/js/lazyload.js"></script>
 <script src="http://g.assets.daily.taobao.net/mw/wetao/0.0.6/js/detailall.js"></script>
+<!--<script src="src/js/detail/detailall.js"></script>-->
 </body>
 </html>

@@ -508,7 +508,10 @@ var getDetailInfoHtml = function(d){
  * @returns {*}
  */
 getItemDetailUrl = function(module, param){
-    var rui=namespace('taobao.utils.uri').getUrl(module, param);
+    var rui=namespace('taobao.utils.uri').getUrl({'subdomain':'a','path':'i'+param.itemId+'.htm'});
+    //'http://a.m.taobao.com/i'+param.itemId+'.htm';
+    //uri.createURI(_modules[0])
+    //namespace('taobao.utils.uriBroker').getUrl(module, param);
     if(rui.indexOf('?')==-1){
         rui=rui+'?ap_ref='+encodeURIComponent(window.location.href);
     }else{
@@ -565,7 +568,8 @@ var getPrices=function(result,fun) {
     $.ajax({
         type:'GET',
         dataType:'json',
-        url:'http://s.m.taobao.com/search_turn_page_iphone.htm?nid='+ ids.join(",") + "&callback=?",
+        url:namespace('taobao.utils.uri').getUrl({'subdomain':'s','path':'search_turn_page_iphone.htm'})+'?nid='+ ids.join(",") + '&callback=?',
+//        url:'http://s.m.taobao.com/search_turn_page_iphone.htm,
         success:function (sret) {
             if (sret.result && "true" == sret.result && sret.listItem) {
                 sret.listItem.forEach(function (item) {
