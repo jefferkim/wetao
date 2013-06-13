@@ -1,4 +1,4 @@
-/*
+/* Lazyload
  *页面图片延迟加载
  *
  *  caochun edit by 20120724,修复safari下,前进回退键到当前页面onscroll事件失效

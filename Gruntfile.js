@@ -19,7 +19,7 @@ module.exports = function(grunt) {
         stripBanners: true
       },
       dist: {
-        src: ['src/js/libs/zepto.min.js','src/js/libs/underscore.js','src/js/mtop/mtop_1.0.0dev.js','src/js/libs/lazyload.js', 'src/js/detail/detailall.js'],
+        src: ['src/js/libs/zepto.min.js','src/js/libs/underscore-min.js','src/js/mtop/mtop_1.0.0dev.js','src/js/libs/lazyload.js', 'src/js/detail/detailall.js'],
         dest: 'build/js/detailall.js'
       }
     },
