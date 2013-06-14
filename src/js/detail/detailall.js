@@ -4,10 +4,6 @@
  * Time: PM1:57
  */
 
-(function () {
-    'use strict';
-
-})();
 
 //全局函数
 weTao={isDesktop:false};
@@ -20,6 +16,7 @@ weTao={isDesktop:false};
         we.isDesktop=true;
         $('body').addClass('desktop');
     }
+
 
     we.getDpi=function(){
         var dpiRatio = 1;
@@ -355,49 +352,17 @@ function detailImageSizeStyle(actualWidth, actualHeight) {
 
 
 
-var getPrices = function (ids, fun) {
-    var result = [];
-    var uncachedIds = [];
-    ids.forEach(function (id) {
-        if (priceCache[id]) {
-            result.push({id:id, price:priceCache[id]});
-        } else {
-            uncachedIds.push(id);
-        }
-    });
-    if (uncachedIds.length) {
-        $.ajax({
-            type:'GET',
-            dataType:'json',
-            url:namespace('taobao.utils.uri').getUrl("s_price", {nid:uncachedIds.join(",")}) + "&callback=?",
-            success:function (sret) {
-                if (sret.result && "true" == sret.result && sret.listItem) {
-                    sret.listItem.forEach(function (item) {
-                        priceCache[item.itemNumId] = item.price;
-                        result.push({id:item.itemNumId, price:item.price});
-                    })
-                }
-                fun && fun.call(arguments.callee, result);
-            },
-            error:function (error) {
-                console.log(error);
-                fun && fun.call(arguments.callee, result);
-            }
-        });
-    } else {
-        fun && fun.call(arguments.callee, result);
-    }
-}
+
 
 var numToBinary = function(num){
     var str = "";
     var next = num;
     var result ;
-    do{
-        result = next % 2;
-        str = result + str ;
-        next = Math.floor(next / 2)
-    }while(next != 0)
+//    do{
+//        result = next % 2;
+//        str = result + str ;
+//        next = Math.floor(next / 2)
+//    }while(next != 0)
     return str;
 }
 /**
@@ -446,19 +411,20 @@ var formatFans = function(fansCount){
  * @returns {string} 返回DOM结构
  */
 var getAccountInfoHtml = function(d){
-    'use strict';
-    var _html = '<img src="' + d.logoUrl +(weTao.isRetina()?'_64x64.jpg':'_32x32.jpg')+'" /><div><h2>' + d.nick +'</h2>';
+//    var _html = '<img src="' + d.logoUrl +(weTao.isRetina()?'_64x64.jpg':'_32x32.jpg')+'" /><div><h2>' + d.nick +'</h2>';
+//
+//    if(noHelper(d.accountType)){
+//        if (d.fansCount == 0) {
+//            _html+='<a>还没有人关注</a>';
+//        } else{
+//            _html+='<a>' + d.fansCount + '关注</a>';
+//        }
+//    }
+//    _html+='</div>';
 
-    if(noHelper(d.accountType)){
-        if (d.fansCount == 0) {
-            _html+='<a>还没有人关注</a>';
-        } else{
-            _html+='<a>' + d.fansCount + '关注</a>';
-        }
-    }
-    _html+='</div>';
+    var _html=_.template($('#detail_accinfo_tpl').html())
 
-    return _html;
+    return  _html(d);
 }
 
 var getAccountInfoData =function(snsId){
@@ -470,7 +436,9 @@ var getAccountInfoData =function(snsId){
         function (result) {
             //success
             var d = result.data;
-            $('#detailPage div.account').html(getAccountInfoHtml(d));
+
+            var h=getAccountInfoHtml(d)
+            $('#detailPage div.account').html(h);
         },
         function(result){
             //fail
@@ -513,8 +481,7 @@ var getDetailInfoHtml = function(d){
 
         } else if (d.tiles[i].type == "picItem") {
             _h+='<div class="media">';
-            _h+='<a style="display: block" href="'+ getItemDetailUrl('a', { itemId: d.tiles[i].item.id })+'" class="item"';
-            _h+='data-id="'+ d.tiles[i].item.id +'">';
+            _h+='<a style="display: block" href="'+ getItemDetailUrl('a', { itemId: d.tiles[i].item.id })+'" class="item">';
             _h+='<img class="lazy"';
             if(weTao.isDesktop){
                 _h+='dataimg="'+ getBetterImg(d.tiles[i].path, 370, parseInt(d.tiles[i].picWidth),true) +'"';
@@ -524,11 +491,11 @@ var getDetailInfoHtml = function(d){
                 _h+='style="'+ detailImageSizeStyle(d.tiles[i].picWidth, d.tiles[i].picHeight) +'"';
             }
             _h+='src="http://a.tbcdn.cn/mw/webapp/fav/img/grey.gif">';
-            _h+='<div class="price" style="display: none;"></div></a></div>';
+            _h+='<div id="price'+ d.tiles[i].item.id +'" class="price" style="display: none;"></div></a></div>';
         }
     }
     if (d.linkUrl) {
-        _h+='<a href="'+ d.linkUrl +'" class="more-content log" data-log="linkUrl">';
+        _h+='<a href="'+d.linkUrl +'" class="more-content log" data-log="linkUrl">';
         _h+='<span class="link-icon"></span>';
         _h+='<span class="link-title">'+ (d.linkTitle || '更多内容') +'</span></a>';
     }
@@ -542,7 +509,10 @@ var getDetailInfoHtml = function(d){
  * @returns {*}
  */
 getItemDetailUrl = function(module, param){
-    var rui=namespace('taobao.utils.uri').getUrl(module, param);
+    var rui=namespace('taobao.utils.uri').getUrl({'subdomain':'a','path':'i'+param.itemId+'.htm'});
+        //'http://a.m.taobao.com/i'+param.itemId+'.htm';
+    //uri.createURI(_modules[0])
+        //namespace('taobao.utils.uriBroker').getUrl(module, param);
     if(rui.indexOf('?')==-1){
         rui=rui+'?ap_ref='+encodeURIComponent(window.location.href);
     }else{
@@ -591,24 +561,24 @@ var getDetailByComponent = function (d,cb){
 var getPrices=function(result,fun) {
     //获取价格参数
     var ids = [];
-
     result.tiles &&  result.tiles.forEach(function(tile){
             tile.item &&  ids.push(tile.item.id);
         }
     );
-
+    var prices=[];
     $.ajax({
         type:'GET',
         dataType:'json',
-        url:namespace('taobao.utils.uri').getUrl("s_price", {nid:ids.join(",")}) + "&callback=?",
+        url:namespace('taobao.utils.uri').getUrl({'subdomain':'s','path':'search_turn_page_iphone.htm'})+'nid='+ ids.join(",") + '&callback=?',
+//        url:'http://s.m.taobao.com/search_turn_page_iphone.htm,
         success:function (sret) {
             if (sret.result && "true" == sret.result && sret.listItem) {
                 sret.listItem.forEach(function (item) {
-                    priceCache[item.itemNumId] = item.price;
-                    result.push({id:item.itemNumId, price:item.price});
+                    //priceCache[item.itemNumId] = item.price;
+                    prices.push({id:item.itemNumId, price:item.price});
                 })
             }
-            fun && fun.call(arguments.callee, result);
+            fun && fun.call(arguments.callee, prices);
         },
         error:function (error) {
             console.log(error);
@@ -633,20 +603,19 @@ var getDetailData = function(snsId,feedId){
             }else{
                 $('#detailPage div.main').html(getDetailInfoHtml(result.data));
             }
-            //getPrices(result.data);
+            getPrices(result.data,function(d){
+                for(var i= 0,len= d.length;i<len;i++){
+                    $('#price'+ d[i].id).text(d[i].price + '元').show()
+                }
+            });
             window.lazyload.reload();
-
         },
         function(result){
             //fail
-
         }
     );
 }
-
-
-
-
+///dfdfdfgfgfhhdfdgfg
 $(function(){
     window.lazyload.init({ lazyHeight: 300 })
     window.lazyload.reload = function () {

@@ -1,9 +1,4 @@
-/**
- * User: 晓田(tancy)
- * Date: 13-6-7
- * Time: PM8:28
- */
-/*
+/* Lazyload
  *页面图片延迟加载
  *
  *  caochun edit by 20120724,修复safari下,前进回退键到当前页面onscroll事件失效
