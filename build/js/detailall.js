@@ -1321,9 +1321,6 @@ var getDetailInfoHtml = function(d){
     if (d.time) {
         _h+='<p class="detail-info">';
         _h+='<span class="icon-clock pub-time">'+ timestamps(d.time)+'</span>';
-        if(parseInt(d.commentCount)>0){
-            _h+='<span class="icon-comment cmt-count">'+d.commentCount+'</span>';
-        }
         _h+='</p>';
     }
     for (var i = 0; i < d.tiles.length; i++) {
