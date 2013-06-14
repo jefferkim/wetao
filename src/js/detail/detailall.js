@@ -562,6 +562,7 @@ var getPrices=function(result,fun) {
             tile.item &&  ids.push(tile.item.id);
         }
     );
+    if(ids.length==0)return false;
     var prices=[];
     $.ajax({
         type:'GET',
@@ -600,6 +601,7 @@ var getDetailData = function(snsId,feedId){
             }else{
                 $('#detailPage div.main').html(getDetailInfoHtml(result.data));
             }
+
             getPrices(result.data,function(d){
                 for(var i= 0,len= d.length;i<len;i++){
                     $('#price'+ d[i].id).text(d[i].price + '元').show()
@@ -612,6 +614,10 @@ var getDetailData = function(snsId,feedId){
         }
     );
 }
+
+
+
+
 ///dfdfdfgfgfhhdfdgfg
 $(function(){
     window.lazyload.init({ lazyHeight: 300 })
