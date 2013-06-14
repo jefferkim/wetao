@@ -7,6 +7,31 @@
   }
 }
 
+.ipad{
+  /* iPads (landscape) ----------- */
+  @media only screen
+  and (min-device-width : 768px)
+  and (max-device-width : 1024px)
+  and (orientation : landscape) {
+    #content{
+      max-width: 640px;
+      margin: 0 auto;
+    }
+  }
+
+  /* iPads (portrait) ----------- */
+  @media only screen
+  and (min-device-width : 768px)
+  and (max-device-width : 1024px)
+  and (orientation : portrait) {
+    #content{
+      max-width: 450px;
+      margin: 0 auto;
+    }
+  }
+
+}
+
 
 
 .tb-h5 .detail {
@@ -137,7 +162,7 @@
   h1 {
     font-size: 20px;
     font-weight: bold;
-    margin: 12px 4px 6px 4px;
+    margin: 12px 4px 10px 4px;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     text-overflow: ellipsis;

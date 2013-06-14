@@ -17,6 +17,7 @@ weTao={isDesktop:false};
         $('body').addClass('desktop');
     }
 
+
     we.getDpi=function(){
         var dpiRatio = 1;
         if (window.devicePixelRatio) {
@@ -494,7 +495,7 @@ var getDetailInfoHtml = function(d){
         }
     }
     if (d.linkUrl) {
-        _h+='<a href="'+ d.linkUrl +'" class="more-content log" data-log="linkUrl">';
+        _h+='<a href="'+d.linkUrl +'" class="more-content log" data-log="linkUrl">';
         _h+='<span class="link-icon"></span>';
         _h+='<span class="link-title">'+ (d.linkTitle || '更多内容') +'</span></a>';
     }
@@ -568,7 +569,7 @@ var getPrices=function(result,fun) {
     $.ajax({
         type:'GET',
         dataType:'json',
-        url:namespace('taobao.utils.uri').getUrl({'subdomain':'s','path':'search_turn_page_iphone.htm'})+'?nid='+ ids.join(",") + '&callback=?',
+        url:namespace('taobao.utils.uri').getUrl({'subdomain':'s','path':'search_turn_page_iphone.htm'})+'nid='+ ids.join(",") + '&callback=?',
 //        url:'http://s.m.taobao.com/search_turn_page_iphone.htm,
         success:function (sret) {
             if (sret.result && "true" == sret.result && sret.listItem) {
