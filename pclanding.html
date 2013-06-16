@@ -4,26 +4,156 @@
     <title>微淘pc</title>
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
     <meta charset="utf-8"/>
-    <meta name="description" content="" />
-    <meta name="keywords" content="" />
+    <meta name="description" content=""/>
+    <meta name="keywords" content=""/>
 
     <link href="src/css/detailall.css" rel="stylesheet" type="text/css">
 
+    <link rel="stylesheet" href="src/less/pclanding.less">
 
+    <script src="http://a.tbcdn.cn/mw/base/libs/less/1.3.0/less-debug.js" type="text/javascript"></script>
+
+
+    <style>
+        .clearfix:after{content:".";display:block;height:0;clear:both;visibility:hidden;}
+        .clearfix{display:inline-block;zoom:1;*display:inline;}/* Hides from IE-mac \*/ * html .clearfix{height:1%;}.clearfix{display:block;}/* End hide from IE-mac */
+
+        .wrapper {
+            text-align: left;
+            margin: 30px auto 0 auto;
+            width: 790px;
+        }
+
+
+        .container .main-content {
+            float: left;
+            width: 450px;
+            height: 700px;
+            background: #FFF;
+            box-shadow: 0 1px 5px #a6a6a4;
+            position: relative;
+            word-wrap: break-word;
+            zoom: 1;
+        }
+
+        .container .side {
+            _position: absolute;
+            position: fixed;
+            left: 50%;
+            top: 0;
+            margin-left: 115px;
+            margin-top: 30px;
+            background: url('tmp/line.png') no-repeat;
+            padding-left: 75px;
+            width: 190px;
+            min-height: 350px;
+            padding-bottom: 80px;
+        }
+
+        .container .side .side-logo {
+            display: block;
+            width: 139px;
+            height: 56px;
+            overflow: hidden;
+            text-indent: -9999px;
+            position: relative;
+            zoom: 1;
+            background:url("tmp/logo.png") no-repeat scroll 0 0;
+        }
+        .container .side .desc{
+            margin-top:15px;
+            font-size:14px;
+            color:#333333;
+            line-height:22px;
+        }
+
+        .container .side .other-info{
+            margin-top:45px;
+
+        }
+        .container .side .qr-info{
+            font-size:14px;
+            color:#666;
+            line-height:22px;
+        }
+        .container .side .qr-container{
+            margin-top:15px;
+        }
+        .container .side .download-link{
+            margin-top:50px;
+            display:block;
+            width:170px;
+            height:51px;
+            text-indent:-9999px;
+            background:url("tmp/download-link.png") no-repeat scroll 0 0;
+        }
+
+
+        .footer{
+            margin:40px auto 55px auto;
+            width:840px;
+            border-top:1px solid #cccccc;
+
+        }
+        .footer p{
+            border-top:1px solid #f5f5f5;
+            font-size:12px;
+            color:#cccccc;
+            padding-top:12px;
+        }
+    </style>
 </head>
 
-<body style="background: #f8f8f8">
-<div id="content">
-    <div class="tb-h5">
-        <div id="detailPage" class="view-page detail">
-            <div class="account">
+<body style="background: #eeeeee">
 
 
+<div class="wrapper">
+    <div class="container clearfix">
+
+
+        <div class="side">
+            <a class="side-logo" href="#">
+                <h1>weitao</h1>
+            </a>
+
+            <div class="desc clearfix">
+                手机淘宝微淘，关注您喜欢的卖家、达人，享受更好的购物生活服务。
             </div>
-            <div class="main"></div>
+            <div class="other-info clearfix">
+                <div class="qr-info">
+                    用手机淘宝客户端扫描，<br/>
+                    关注微淘帐号阅读更多！
+                </div>
+                <div class="qr-container">
+                    <img class="qr-code"  src="tmp/qrcode.png"/>
+
+                </div>
+                <p><a href="#" class="download-link">下载淘宝客户端</a></p>
+            </div>
         </div>
+
+        <div class="main-content">
+
+            <div id="content">
+                <div class="tb-h5">
+                    <div id="detailPage" class="view-page detail">
+                        <div class="account"></div>
+                        <div class="main"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
     </div>
+
+    <div class="footer clearfix">
+        <p>Copyright © 2003-2013 Taobao.com 版权所有</p>
+    </div>
+
 </div>
+
+
 <script id="detail_accinfo_tpl" type="text/template">
     <a snsid="<%= snsId %>" class="brand log" data-log="detailAccount">
         <div class="default">
@@ -47,7 +177,9 @@
 </script>
 <script id="detail_content_tpl" type="text/template">
     <h1><%= title %> </h1>
-    <div class="favbtn <% if(isLiked =='1'){%> faved <% } %> log" data-log="<% if(isLiked =='1'){%>cancelfaved<% }else{ %>addfav<% } %>"></div>
+
+    <div class="favbtn <% if(isLiked =='1'){%> faved <% } %> log"
+         data-log="<% if(isLiked =='1'){%>cancelfaved<% }else{ %>addfav<% } %>"></div>
     <% if (time) { %>
     <p class="detail-info">
         <span class="icon-clock pub-time"><%= timestamps(time) %></span>
@@ -97,18 +229,14 @@
         <span class="link-title"><%= linkTitle || '更多内容' %></span></a>
     <% } %>
 </script>
-<script src="src/js/libs/zepto.min.js"></script>
+
+<!--<script src="src/js/libs/zepto.min.js"></script>
 <script src="src/js/libs/underscore-min.js"></script>
-<script src="src/js/libs/backbone-min.js"></script>
-<script src="src/js/mtop/namespace.js"></script>
-<script src="src/js/mtop/config.js"></script>
-<script src="src/js/mtop/cookie.js"></script>
-<script src="src/js/mtop/md5.js"></script>
-<script src="src/js/mtop/parameter.js"></script>
-<script src="src/js/mtop/uri.js"></script>
-<script src="src/js/mtop/mtop.js"></script>
+<script src="src/js/mtop/mtop_1.0.0dev.js"></script>
 <script src="src/js/libs/lazyload.js"></script>
 <script src="src/js/detail/detailall.js"></script>
+
+<script src="src/js/detail/pclanding.js"></script>-->
 
 
 </body>
