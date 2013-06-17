@@ -1,3 +1,5 @@
+/**
+ * mtop*/
 (function () {
     window['namespace'] = function (key, value) {
         // set value
@@ -271,11 +273,11 @@ _define('taobao.utils.encode.md5',function () {
         }
 
         var x = [],
-         k, AA, BB, CC, DD, a, b, c, d,
-         S11 = 7, S12 = 12, S13 = 17, S14 = 22,
-         S21 = 5, S22 = 9 , S23 = 14, S24 = 20,
-         S31 = 4, S32 = 11, S33 = 16, S34 = 23,
-         S41 = 6, S42 = 10, S43 = 15, S44 = 21;
+            k, AA, BB, CC, DD, a, b, c, d,
+            S11 = 7, S12 = 12, S13 = 17, S14 = 22,
+            S21 = 5, S22 = 9 , S23 = 14, S24 = 20,
+            S31 = 4, S32 = 11, S33 = 16, S34 = 23,
+            S41 = 6, S42 = 10, S43 = 15, S44 = 21;
 
         string = utf8Encode(string);
 
@@ -368,7 +370,7 @@ _define('taobao.utils.encode.md5',function () {
 });
 
 _define('taobao.utils.uri.getParam',function() {
-   return function (paramKey) {
+    return function (paramKey) {
         var queryString = this.queryMap || (function (paramStr) {
             if (paramStr.length < 1) {
                 return "";
@@ -430,31 +432,31 @@ _define('taobao.utils.uri.getUrl',function (require) {
      * @param {Object} param.data 请求参数
      *
      */
-     return function (param) {
+    return function (param) {
 
-         function __append(dist,append){
-             if(!append){
-                 return dist;
-             }
-             if(dist.indexOf("?") < 0){
-                 dist += '?';
-             }
-             var last = dist.charAt(dist.length - 1),
-                 first = append.charAt(0);
-             if('?' === last || '&' === last){
-                 if('?' === first || '&' === first){
-                     return dist + append.substr(1);
-                 }else{
-                     return dist + append;
-                 }
-             }else{
-                 if('?' === first || '&' === first){
-                     return dist + append;
-                 }else{
-                     return dist + '&' + append;
-                 }
-             }
-         }
+        function __append(dist,append){
+            if(!append){
+                return dist;
+            }
+            if(dist.indexOf("?") < 0){
+                dist += '?';
+            }
+            var last = dist.charAt(dist.length - 1),
+                first = append.charAt(0);
+            if('?' === last || '&' === last){
+                if('?' === first || '&' === first){
+                    return dist + append.substr(1);
+                }else{
+                    return dist + append;
+                }
+            }else{
+                if('?' === first || '&' === first){
+                    return dist + append;
+                }else{
+                    return dist + '&' + append;
+                }
+            }
+        }
 
         var url = param.url || (function (http_env) {
             var host = param.host || ( param.subdomain + '.' + http_env.sysType + '.' + http_env.defaultDomain);
@@ -487,6 +489,7 @@ _define('taobao.utils.uri.getUrl',function (require) {
     };
 
 });
+
 /**
  * @author 武仲(wuzhong@taobao.com)
  * @since 2013.6.3
@@ -503,6 +506,7 @@ _define('taobao.utils.uri.getUrl',function (require) {
  *    2. 注意的问题
  *       1. 必须和mtop同域
  */
+
 _define('taobao.biz.mtop',function(require, exports) {
     // require module
     var $ = require ? require("zepto","$") : namespace("$"),
@@ -669,3 +673,4 @@ _define('taobao.biz.mtop',function(require, exports) {
         }
     });
 });
+

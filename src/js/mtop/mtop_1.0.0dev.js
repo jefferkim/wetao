@@ -1,3 +1,5 @@
+/**
+ * mtop*/
 (function () {
     window['namespace'] = function (key, value) {
         // set value
@@ -487,6 +489,7 @@ _define('taobao.utils.uri.getUrl',function (require) {
     };
 
 });
+
 /**
  * @author 武仲(wuzhong@taobao.com)
  * @since 2013.6.3
@@ -503,6 +506,7 @@ _define('taobao.utils.uri.getUrl',function (require) {
  *    2. 注意的问题
  *       1. 必须和mtop同域
  */
+
 _define('taobao.biz.mtop',function(require, exports) {
     // require module
     var $ = require ? require("zepto","$") : namespace("$"),
@@ -669,3 +673,4 @@ _define('taobao.biz.mtop',function(require, exports) {
         }
     });
 });
+
