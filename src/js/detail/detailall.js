@@ -439,6 +439,7 @@ var getAccountInfoData =function(snsId){
 
             var h=getAccountInfoHtml(d)
             $('#detailPage div.account').html(h);
+            if($(".qr-code").length){ $(".qr-code").attr("src", d.two2CodeUrl);}
         },
         function(result){
             //fail
