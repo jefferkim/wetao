@@ -67,7 +67,7 @@
 
 
 <script id="detail_accinfo_tpl" type="text/template">
-    <a href="we/index.htm#account/<%=id %>" snsid="<%=id %>" class="log" data-log="detailAccount">
+    <span href="we/index.htm#account/<%=id %>" snsid="<%=id %>" class="log" data-log="detailAccount">
         <% if(typeof logoUrl!='undefined'&&logoUrl!==''){ %>
         <img src="<%=logoUrl +(weTao.isRetina()?'_64x64.jpg':'_32x32.jpg') %>"/>
         <% }else{%>
@@ -83,7 +83,7 @@
             <% } %>
             <% } %>
         </div>
-    </a>
+    </span>
 
 </script>
 <script id="detail_plugin"  type="text/template">
@@ -122,15 +122,14 @@
     <% } %>
     <% for (var i = 0; i < tiles.length; i++) { %>
     <% if (tiles[i].type == "pic") { %>
-    <div class="media"><img class="lazy"
+    <div class="media">
         <%if(Env.isDesktop){%>
-        dataimg="<%=getBetterImg(tiles[i].path, 370, parseInt(tiles[i].picWidth),true) %>"
+        <img src="<%=getBetterImg(tiles[i].path, 370, parseInt(tiles[i].picWidth),true) %>"/>
         <% }else{%>
-        dataimg="<%=getBetterImg(tiles[i].path, window.innerWidth-30, parseInt(tiles[i].picWidth)) %>"
-        style="<%= detailImageSizeStyle(tiles[i].picWidth, tiles[i].picHeight) %>"
+        <img class="lazy" dataimg="<%=getBetterImg(tiles[i].path, window.innerWidth-30, parseInt(tiles[i].picWidth)) %>"
+        style="<%= detailImageSizeStyle(tiles[i].picWidth, tiles[i].picHeight) %>" src="http://a.tbcdn.cn/mw/webapp/fav/img/grey.gif"/>
         <% } %>
 
-        src="http://a.tbcdn.cn/mw/webapp/fav/img/grey.gif">
     </div>
     <% } else if (tiles[i].type == "text") { %>
 
@@ -140,14 +139,15 @@
     <div class="media">
         <a style="display: block" id="price<%= tiles[i].item.id %" href="<%= getItemDetailUrl('a', { itemId: tiles[i].item.id }) %>" class="item"
            data-id="<%= tiles[i].item.id %>">
-            <img class="lazy"
+
             <%if(Env.isDesktop){%>
-            dataimg="<%= getBetterImg(tiles[i].path, 370, parseInt(tiles[i].picWidth),true) %>"
+            <img src="<%= getBetterImg(tiles[i].path, 370, parseInt(tiles[i].picWidth),true) %>"/>
             <% }else{ %>
-            dataimg="<%= getBetterImg(tiles[i].path, window.innerWidth-30, parseInt(tiles[i].picWidth)) %>"
+            <img class="lazy" dataimg="<%= getBetterImg(tiles[i].path, window.innerWidth-30, parseInt(tiles[i].picWidth)) %>"
             style="<%= detailImageSizeStyle(tiles[i].picWidth, tiles[i].picHeight) %>"
+            src="http://a.tbcdn.cn/mw/webapp/fav/img/grey.gif"/>
             <% } %>
-            src="http://a.tbcdn.cn/mw/webapp/fav/img/grey.gif">
+
 
             <div class="price" style="display: none;"></div>
         </a>
@@ -161,15 +161,28 @@
     <% } %>
 </script>
 
-<!--<script src="http://g.assets.daily.taobao.net/mw/wetao/0.0.6/js/zepto.min.js"></script>
-<script src="http://g.assets.daily.taobao.net/mw/wetao/0.0.6/js/underscore-min.js"></script>
-<script src="http://g.assets.daily.taobao.net/mw/wetao/0.0.6/js/mtop_1.0.0dev.js"></script>
-<script src="http://g.assets.daily.taobao.net/mw/wetao/0.0.6/js/lazyload.js"></script>
-<script src="src/js/libs/env.js"></script>
-<script src="src/js/detail/detailall.js"></script>
-<script src="build/js/detailall.js"></script>-->
 
-<script src="http://g.assets.daily.taobao.net/mw/wetao/0.0.7/js/detailall.js"></script>
+
+
+
+
+
+
+<!--  <script src="http://g.assets.daily.taobao.net/mw/wetao/0.0.7/js/detailall.js"></script>-->
+
+
+<script src="http://a.tbcdn.cn/mw/base/libs/jquery/1.7.1/jquery.js"></script>
+<script>
+    Zepto = jQuery;
+</script>
+
+<script src="http://g.assets.daily.taobao.net/mw/wetao/0.0.6/js/underscore-min.js"></script>
+<script src="mtop_1.0.0dev_pc.js"></script>
+<script src="http://g.assets.daily.taobao.net/mw/wetao/0.0.6/js/lazyload.js"></script>
+<!--<script src="src/js/libs/env.js"></script>-->
+<script src="src/js/detail/detailall.js"></script>
+<!--<script src="build/js/detailall.js"></script>-->
+
 
 </body>
 </html>
