@@ -331,7 +331,6 @@ function feedImageSizeStyle(actualWidth, actualHeight){
 }
 
 function detailImageSizeStyle(actualWidth, actualHeight) {
-
     var width = parseInt(actualWidth)
     var height = parseInt(actualHeight)
     //$('#content').attr('')
@@ -439,7 +438,7 @@ var getAccountInfoData =function(snsId){
 
             var h=getAccountInfoHtml(d)
             $('#detailPage div.account').html(h);
-            if($(".qr-code").length){ $(".qr-code").attr("src", d.two2CodeUrl);}
+            if($(".qr-container").length){ $(".qr-container").html('<img src="'+d.two2CodeUrl+'" class="qr-code">');}
         },
         function(result){
             //fail
@@ -466,7 +465,7 @@ var getDetailInfoHtml = function(d){
         if (d.tiles[i].type == "pic") {
             _h+='<div class="media">';
             if(weTao.isDesktop){
-                _h+= '<img class="lazy" src="'+getBetterImg(d.tiles[i].path, 370, parseInt(d.tiles[i].picWidth),true)+'" style="'+detailImageSizeStyle(d.tiles[i].picWidth, d.tiles[i].picHeight)+'"/>';
+                _h+= '<img class="lazy" src="'+getBetterImg(d.tiles[i].path, 406, parseInt(d.tiles[i].picWidth),true)+'" style="'+detailImageSizeStyle(d.tiles[i].picWidth, d.tiles[i].picHeight)+'"/>';
             }else{
                 _h+= '<img class="lazy" style="'+detailImageSizeStyle(d.tiles[i].picWidth, d.tiles[i].picHeight)+'" dataimg="'+getBetterImg(d.tiles[i].path, window.innerWidth-30, parseInt(d.tiles[i].picWidth))+' src="http://a.tbcdn.cn/mw/webapp/fav/img/grey.gif"/>';
             }
@@ -480,7 +479,7 @@ var getDetailInfoHtml = function(d){
             _h+='<a style="display: block" href="'+ getItemDetailUrl('a', { itemId: d.tiles[i].item.id })+'" class="item">';
             _h+='<img class="lazy"';
             if(weTao.isDesktop){
-                _h+='src="'+ getBetterImg(d.tiles[i].path, 370, parseInt(d.tiles[i].picWidth),true) +'"';
+                _h+='src="'+ getBetterImg(d.tiles[i].path, 406, parseInt(d.tiles[i].picWidth),true) +'"';
                 _h+='style="'+ detailImageSizeStyle(d.tiles[i].picWidth, d.tiles[i].picHeight) +'"/>';
             }else{
                 _h+='dataimg="'+ getBetterImg(d.tiles[i].path, window.innerWidth-30, parseInt(d.tiles[i].picWidth)) +'"';
