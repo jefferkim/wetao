@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>微淘pc</title>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+    <meta charset="utf-8"/>
+    <meta name="description" content=""/>
+    <meta name="keywords" content=""/>
+
+    <link href="src/css/detailall.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet/less" href="src/less/pclanding.less">
+
+    <script src="http://a.tbcdn.cn/mw/base/libs/less/1.3.0/less-debug.js" type="text/javascript"></script>
+
+
+</head>
+
+<body style="background: #eeeeee">
+
+
+<div class="wrapper">
+    <div class="container clearfix">
+
+
+        <div class="side">
+            <a class="side-logo" href="#">
+                <h1>weitao</h1>
+            </a>
+
+            <div class="desc clearfix">
+                手机淘宝微淘，关注您喜欢的卖家、达人，享受更好的购物生活服务。
+            </div>
+            <div class="other-info clearfix">
+                <div class="qr-info">
+                    用手机淘宝客户端扫描，<br/>
+                    关注微淘帐号阅读更多！
+                </div>
+                <div class="qr-container">
+                    <img class="qr-code"  src="tmp/qrcode.png"/>
+
+                </div>
+                <p><a href="#" class="download-link">下载淘宝客户端</a></p>
+            </div>
+        </div>
+
+        <div class="main-content">
+
+            <div id="content">
+                <div class="tb-h5">
+                    <div id="detailPage" class="view-page detail">
+                        <div class="account"></div>
+                        <div class="main"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="footer clearfix">
+        <p>Copyright © 2003-2013 Taobao.com 版权所有</p>
+    </div>
+
+</div>
+
+
+<script id="detail_accinfo_tpl" type="text/template">
+    <a href="we/index.htm#account/<%=id %>" snsid="<%=id %>" class="log" data-log="detailAccount">
+        <% if(typeof logoUrl!='undefined'&&logoUrl!==''){ %>
+        <img src="<%=logoUrl +(weTao.isRetina()?'_64x64.jpg':'_32x32.jpg') %>"/>
+        <% }else{%>
+        <div class="default"></div>
+        <% } %>
+        <div>
+            <h2><%= nick %></h2>
+            <% if(noHelper(accountType)){ %>
+            <% if (fansCount == 0) { %>
+            <span>还没有人关注</span>
+            <% } else{ %>
+            <span><%=formatFans(fansCount) %>关注者</span>
+            <% } %>
+            <% } %>
+        </div>
+    </a>
+
+</script>
+<script id="detail_plugin"  type="text/template">
+    <h1><%= title %> </h1>
+    <div class="favbtn <% if(isLiked =='1'){%> faved <% } %> log" data-log="<% if(isLiked =='1'){%>cancelfaved<% }else{ %>addfav<% } %>"></div>
+    <% if (time) { %>
+    <p class="detail-info">
+        <span class="icon-clock pub-time"><%= timestamps(time) %></span>
+    </p>
+    <% } %>
+    <ul>
+        <% for (var i = 0; i < tiles.length; i++) { %>
+        <li>
+            <a style="display: block" href="<%= getItemDetailUrl('a', { itemId: tiles[i].item.id }) %>" class="item"
+               data-id="<%= tiles[i].item.id %>">
+                <img class="lazy" dataimg="<%= getBetterImg(tiles[i].path, 180, parseInt(tiles[i].picWidth),true) %>">
+                <h4><%=tiles[i].text%></h4>
+                <p id="price<%=tiles[i].item.id%>"></p>
+            </a>
+        </li>
+        <% if((i+1)%2==0){ %>
+    </ul><ul>
+    <% }%>
+    <% }  %>
+
+</ul>
+</script>
+<script id="detail_content_tpl" type="text/template">
+    <h1><%= title %> </h1>
+    <div class="favbtn <% if(isLiked =='1'){%> faved <% } %> log" data-log="<% if(isLiked =='1'){%>cancelfaved<% }else{ %>addfav<% } %>"></div>
+    <% if (time) { %>
+    <p class="detail-info">
+        <span class="icon-clock pub-time"><%= timestamps(time) %></span>
+
+    </p>
+    <% } %>
+    <% for (var i = 0; i < tiles.length; i++) { %>
+    <% if (tiles[i].type == "pic") { %>
+    <div class="media"><img class="lazy"
+        <%if(Env.isDesktop){%>
+        dataimg="<%=getBetterImg(tiles[i].path, 370, parseInt(tiles[i].picWidth),true) %>"
+        <% }else{%>
+        dataimg="<%=getBetterImg(tiles[i].path, window.innerWidth-30, parseInt(tiles[i].picWidth)) %>"
+        style="<%= detailImageSizeStyle(tiles[i].picWidth, tiles[i].picHeight) %>"
+        <% } %>
+
+        src="http://a.tbcdn.cn/mw/webapp/fav/img/grey.gif">
+    </div>
+    <% } else if (tiles[i].type == "text") { %>
+
+    <p class="text"><%= tiles[i].text.replace(/(\n)+/g, '<span style="height:5px;display:block"></span>') %></p>
+
+    <% } else if (tiles[i].type == "picItem") { %>
+    <div class="media">
+        <a style="display: block" id="price<%= tiles[i].item.id %" href="<%= getItemDetailUrl('a', { itemId: tiles[i].item.id }) %>" class="item"
+           data-id="<%= tiles[i].item.id %>">
+            <img class="lazy"
+            <%if(Env.isDesktop){%>
+            dataimg="<%= getBetterImg(tiles[i].path, 370, parseInt(tiles[i].picWidth),true) %>"
+            <% }else{ %>
+            dataimg="<%= getBetterImg(tiles[i].path, window.innerWidth-30, parseInt(tiles[i].picWidth)) %>"
+            style="<%= detailImageSizeStyle(tiles[i].picWidth, tiles[i].picHeight) %>"
+            <% } %>
+            src="http://a.tbcdn.cn/mw/webapp/fav/img/grey.gif">
+
+            <div class="price" style="display: none;"></div>
+        </a>
+    </div>
+    <% } %>
+    <% } %>
+    <% if (linkUrl) { %>
+    <a href="<%= linkUrl %>" class="more-content log" data-log="linkUrl">
+        <span class="link-icon"></span>
+        <span class="link-title"><%= linkTitle || '更多内容' %></span></a>
+    <% } %>
+</script>
+
+<!--<script src="http://g.assets.daily.taobao.net/mw/wetao/0.0.6/js/zepto.min.js"></script>
+<script src="http://g.assets.daily.taobao.net/mw/wetao/0.0.6/js/underscore-min.js"></script>
+<script src="http://g.assets.daily.taobao.net/mw/wetao/0.0.6/js/mtop_1.0.0dev.js"></script>
+<script src="http://g.assets.daily.taobao.net/mw/wetao/0.0.6/js/lazyload.js"></script>
+<script src="src/js/libs/env.js"></script>
+<script src="src/js/detail/detailall.js"></script>
+<script src="build/js/detailall.js"></script>-->
+
+<script src="http://g.assets.daily.taobao.net/mw/wetao/0.0.7/js/detailall.js"></script>
+
+</body>
+</html>
