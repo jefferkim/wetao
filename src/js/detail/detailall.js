@@ -447,6 +447,23 @@ var getAccountInfoData =function(snsId){
     );
 }
 
+var linkUrlFormat =function(linkUrl){
+    if(linkUrl)
+    {
+        if(linkUrl.indexOf('detail.tmall.com')!=-1)
+        {
+            var id=linkUrl.match(/id=[\d]+/);
+            id = id && id[0].split('=');
+            if(id && id.length > 1)
+            {
+                return "http://a.m.tmall.com/i"+id[1]+".htm";
+            }
+        }
+    }
+    return linkUrl;
+}
+
+
 /**
  *  标准类型detail dom 结构
  * @param d
@@ -490,10 +507,11 @@ var getDetailInfoHtml = function(d){
         }
     }
     if (d.linkUrl) {
-        _h+='<a href="'+d.linkUrl +'" class="more-content log" data-log="linkUrl">';
+        _h+='<a href="'+linkUrlFormat(d.linkUrl) +'" class="more-content log" data-log="linkUrl">';
         _h+='<span class="link-icon"></span>';
         _h+='<span class="link-title">'+ (d.linkTitle || '更多内容') +'</span></a>';
     }
+    window.abc=linkUrlFormat(d.linkUrl);
     return _h;
 }
 
@@ -604,6 +622,11 @@ var getDetailData = function(snsId,feedId){
                 for(var i= 0,len= d.length;i<len;i++){
                     $('#price'+ d[i].id).text(d[i].price + '元').show()
                 }
+            });
+            $('#detailPage div.main .more-content').bind('click',function(e){
+                var url=$(e.currentTarget).attr('href').replace('&sprefer','%26sprefer');
+                alert(window.abc);
+                window.location=window.abc;
             });
             window.lazyload.reload();
         },
