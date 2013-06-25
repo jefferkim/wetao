@@ -2,12 +2,13 @@
  * User: 晓田(tancy)
  * Date: 13-6-6
  * Time: PM1:57
+ *
+ * edited by jinjianfeng
  */
 
 
 //全局函数
 weTao={isDesktop:false};
-
 
 (function (we) {
 
@@ -484,7 +485,7 @@ var getDetailInfoHtml = function(d){
             if(weTao.isDesktop){
                 _h+= '<img class="lazy" src="'+getBetterImg(d.tiles[i].path, 406, parseInt(d.tiles[i].picWidth),true)+'" style="'+detailImageSizeStyle(d.tiles[i].picWidth, d.tiles[i].picHeight)+'"/>';
             }else{
-                _h+= '<img class="lazy" style="'+detailImageSizeStyle(d.tiles[i].picWidth, d.tiles[i].picHeight)+'" dataimg="'+getBetterImg(d.tiles[i].path, window.innerWidth-30, parseInt(d.tiles[i].picWidth))+' src="http://a.tbcdn.cn/mw/webapp/fav/img/grey.gif"/>';
+                _h+= '<img class="lazy" style="'+detailImageSizeStyle(d.tiles[i].picWidth, d.tiles[i].picHeight)+'" dataimg="'+getBetterImg(d.tiles[i].path, window.innerWidth-30, parseInt(d.tiles[i].picWidth))+'" src="http://a.tbcdn.cn/mw/webapp/fav/img/grey.gif"/>';
             }
             _h+= '</div>';
         } else if (d.tiles[i].type == "text") {
@@ -496,12 +497,12 @@ var getDetailInfoHtml = function(d){
             _h+='<a style="display: block" href="'+ getItemDetailUrl('a', { itemId: d.tiles[i].item.id })+'" class="item">';
             _h+='<img class="lazy"';
             if(weTao.isDesktop){
-                _h+='src="'+ getBetterImg(d.tiles[i].path, 406, parseInt(d.tiles[i].picWidth),true) +'"';
-                _h+='style="'+ detailImageSizeStyle(d.tiles[i].picWidth, d.tiles[i].picHeight) +'"/>';
+                _h+=' src="'+ getBetterImg(d.tiles[i].path, 406, parseInt(d.tiles[i].picWidth),true) +'"';
+                _h+=' style="'+ detailImageSizeStyle(d.tiles[i].picWidth, d.tiles[i].picHeight) +'"/>';
             }else{
-                _h+='dataimg="'+ getBetterImg(d.tiles[i].path, window.innerWidth-30, parseInt(d.tiles[i].picWidth)) +'"';
-                _h+='style="'+ detailImageSizeStyle(d.tiles[i].picWidth, d.tiles[i].picHeight) +'"';
-                _h+='src="http://a.tbcdn.cn/mw/webapp/fav/img/grey.gif"/>';
+                _h+=' dataimg="'+ getBetterImg(d.tiles[i].path, window.innerWidth-30, parseInt(d.tiles[i].picWidth)) +'"';
+                _h+=' style="'+ detailImageSizeStyle(d.tiles[i].picWidth, d.tiles[i].picHeight) +'"';
+                _h+=' src="http://a.tbcdn.cn/mw/webapp/fav/img/grey.gif"/>';
             }
             _h+='<div id="price'+ d.tiles[i].item.id +'" class="price" style="display: none;"></div></a></div>';
         }
@@ -639,8 +640,6 @@ var getDetailData = function(snsId,feedId){
 
 ///dfdfdfgfgfhhdfdgfg
 $(function(){
-
-  
 
     var app_init = function(){
         var _hash = window.location.hash.split('/');
