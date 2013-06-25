@@ -23,6 +23,18 @@ module.exports = function(grunt) {
         dest: 'build/js/detailall.js'
       }
     },
+
+    concatPc:{
+      options: {
+        banner: '<%= banner %>',
+        stripBanners: true
+      },
+      dist: {
+        src: ['src/js/libs/underscore-min.js','src/js/pclanding/mtop_1.0.0dev_pc.js','src/js/pclanding/pclanding.js'],
+        dest: 'build/js/contactPc.js'
+      }
+    },
+    
       depconcat: {
           options: {
           },
