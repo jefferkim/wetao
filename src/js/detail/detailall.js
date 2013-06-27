@@ -4,7 +4,6 @@
  * Time: PM1:57
  */
 
-
 //全局函数
 weTao={isDesktop:false};
 

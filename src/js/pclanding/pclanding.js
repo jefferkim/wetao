@@ -575,7 +575,7 @@ var getDetailByComponent = function (d,cb){
 var getPrices=function(result,fun) {
     //获取价格参数
     var ids = [];
-    result.tiles &&  result.tiles.forEach(function(tile){
+    result.tiles &&  _.each(result.tiles,function(tile){
             tile.item &&  ids.push(tile.item.id);
         }
     );
@@ -588,7 +588,7 @@ var getPrices=function(result,fun) {
 //        url:'http://s.m.taobao.com/search_turn_page_iphone.htm,
         success:function (sret) {
             if (sret.result && "true" == sret.result && sret.listItem) {
-                sret.listItem.forEach(function (item) {
+                _.each(sret.listItem,function (item) {
                     //priceCache[item.itemNumId] = item.price;
                     prices.push({id:item.itemNumId, price:item.price});
                 })
@@ -612,12 +612,12 @@ var getDetailData = function(snsId,feedId){
         function (result) {
             //success
             //console.log(result);
-            if(typeof result.data.componentId!='undefined'){
+            /*if(typeof result.data.componentId!='undefined'){
                 $('#detailPage div.main').html(getDetailByComponent(result.data));
 
-            }else{
+            }else{*/
                 $('#detailPage div.main').html(getDetailInfoHtml(result.data));
-            }
+            //}
 
             getPrices(result.data,function(d){
                 for(var i= 0,len= d.length;i<len;i++){
@@ -628,6 +628,7 @@ var getDetailData = function(snsId,feedId){
                 var url=$(e.currentTarget).attr('href').replace('&sprefer','%26sprefer');
                 window.location=window.abc;
             });
+
         },
         function(result){
             //fail

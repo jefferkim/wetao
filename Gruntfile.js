@@ -19,19 +19,8 @@ module.exports = function(grunt) {
         stripBanners: true
       },
       dist: {
-        src: ['src/js/libs/encodeHtml.js','src/js/libs/zepto.min.js','src/js/libs/underscore-min.js','src/js/mtop/mtop_1.0.0dev.js','src/js/libs/lazyload.js', 'src/js/detail/detailall.js'],
-        dest: 'build/js/detailall.js'
-      }
-    },
-
-    concatPc:{
-      options: {
-        banner: '<%= banner %>',
-        stripBanners: true
-      },
-      dist: {
-        src: ['src/js/libs/underscore-min.js','src/js/pclanding/mtop_1.0.0dev_pc.js','src/js/pclanding/pclanding.js'],
-        dest: 'build/js/contactPc.js'
+        src: ['src/js/libs/underscore-min.js','src/js/pclanding/pclanding.js','src/js/pclanding/mtop_1.0.0dev_pc.js'],
+        dest: 'build/js/pclanding.js'
       }
     },
     
@@ -104,7 +93,7 @@ module.exports = function(grunt) {
   // These plugins provide necessary tasks.
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-depconcat');
-  //grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
   //grunt.loadNpmTasks('grunt-contrib-nodeunit');
   //grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');

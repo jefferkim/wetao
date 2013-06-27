@@ -1,1 +1,21 @@
-env: node: No such file or directory
+.clearfix:after{content:".";display:block;height:0;clear:both;visibility:hidden;}
+.clearfix{display:inline-block;zoom:1;*display:inline;}
+* html .clearfix{height:1%;}
+.clearfix{display:block;}
+.wrapper{text-align:left;margin:30px auto 0 auto;width:790px;}
+.container #content{max-width:430px;width:430px;margin-top:22px;}
+.container .main-content{float:left;width:450px;min-height:700px;background:#FFF;box-shadow:0 1px 5px #a6a6a4;position:relative;word-wrap:break-word;zoom:1;}
+.container .side{_position:absolute;position:fixed;left:50%;top:0;margin-left:115px;margin-top:30px;background:url('http://img03.taobaocdn.com/tps/i3/T1zNe1XDXhXXXoY1bX-2-350.png') no-repeat;padding-left:75px;width:190px;min-height:350px;padding-bottom:80px;}
+.tb-h5 .detail .account:after{width:0;height:0;border:none;}
+.container .side .side-logo{display:block;width:139px;height:56px;overflow:hidden;text-indent:-9999px;position:relative;zoom:1;background:url("http://img04.taobaocdn.com/tps/i4/T1J6FjFo8aXXcqRxfa-139-56.png") no-repeat scroll 0 0;}
+.container .side .desc{margin-top:15px;font-size:14px;color:#333333;line-height:22px;}
+.container .side .other-info{margin-top:45px;}
+.container .side .qr-info{font-size:14px;color:#666;line-height:22px;}
+.container .side .qr-container{width:167px;height:167px;overflow:hidden;position:relative;margin-top:15px;}
+.container .side .qr-code{position:absolute;left:-6px;top:-6px;}
+.container .side .download-link{margin-top:50px;display:block;width:170px;height:51px;text-indent:-9999px;background:url("http://img02.taobaocdn.com/tps/i2/T1.ohiFdtdXXcGTpDh-170-51.png") no-repeat scroll 0 0;}
+.footer{margin:40px auto 55px auto;width:840px;border-top:1px solid #cccccc;}
+.footer p{border-top:1px solid #f5f5f5;font-size:12px;color:#cccccc;padding-top:12px;}
+.tb-h5 .detail .account h2{line-height:18px;}
+.icon-clock{background:url("http://img04.taobaocdn.com/tps/i4/T1MlFlFglaXXc9v57_-10-10.png") no-repeat scroll 0 0;}
+.tb-h5 .detail .more-content span.link-icon{background:url("http://img01.taobaocdn.com/tps/i1/T1QJthFjXgXXaSQP_X-16-16.png") no-repeat scroll 0 0;}
