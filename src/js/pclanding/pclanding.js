@@ -508,9 +508,9 @@ var getDetailInfoHtml = function(d){
         }
     }
     if (d.linkUrl) {
-        _h+='<a href="'+linkUrlFormat(d.linkUrl) +'" class="more-content log" data-log="linkUrl">';
-        _h+='<span class="link-icon"></span>';
-        _h+='<span class="link-title">'+ (d.linkTitle || '更多内容') +'</span></a>';
+        _h+='<a href="'+linkUrlFormat(d.linkUrl) +'" class="more-content log" data-log="linkUrl"><div class="wrap">';
+        
+        _h+='<span class="link-title">'+ (d.linkTitle || '更多内容') +'</span></div></a>';
     }
     window.abc=linkUrlFormat(d.linkUrl);
     return _h;
